@@ -8,9 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
@@ -40,9 +42,14 @@ public class SpringBootMongoApplication {
 }
 
 @RestController
+@RefreshScope
 class CarController {
 	
-	@Autowired CarRepository carRepository;
+	@Value("${message}")
+	private String message;
+	
+	@Autowired 
+	CarRepository carRepository;
 	
 	public CarController(CarRepository carRepository) {
 		this.carRepository = carRepository;
@@ -58,6 +65,10 @@ class CarController {
 		return "hello...";
 	}
 	
+	@RequestMapping(value="/message")
+	public String getMessage() {
+		return message;
+	}
 }
 
 @RepositoryRestResource
