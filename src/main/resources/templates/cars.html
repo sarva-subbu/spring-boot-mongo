@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Reservations...</title>
+</head>
+<body>
+
+<div th:each="car : ${cars}">
+	<div> 
+	<b th:text="${car.id}">ID</b> 
+	<span th:text="${car.carName}">Name</span>
+	</div>
+</div>
+
+</body>
+</html>

@@ -17,6 +17,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,6 +41,19 @@ public class SpringBootMongoApplication {
 		};
 	}
 	
+}
+
+@Controller
+class SpringMvcController {
+
+	@Autowired
+	private CarRepository carRepository;
+
+	@RequestMapping("/cars.htm")
+	public String page(Model model) {
+		model.addAttribute("cars", carRepository.findAll());
+		return "cars";
+	}
 }
 
 @RestController
