@@ -3,11 +3,9 @@ package com.sarva;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Data;
 
-@Document
 @Data
 public class Employee {
 
@@ -15,7 +13,7 @@ public class Employee {
 	private String id;
 	
 	@Version
-	private String version;
+	private Long version;
 	
 	@Indexed
 	private String firstName;
